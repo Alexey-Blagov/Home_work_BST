@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -28,7 +29,7 @@ namespace Home_Work_BST
         /// <param name="salary"></param> Зарплата
         public void InsertNode(string name, int salary)
         {
-            Node newNode = new Node(name, salary);
+            Node newNode = new Node(name, salary); //Новый элемент BST 
 
             if (root == null)
                 root = newNode;
@@ -60,25 +61,37 @@ namespace Home_Work_BST
                 }
             }
         }
-
-       
-        public void Inorder(Node? Root) // Симетричный обход дерева с выводом данных по сотдникам 
+        /// <summary>
+        /// Мктод симетричного обхода сформированного BST с печатью значений по уровню зарплаты при таком обходе значения узлов выстраиваются по возрастанию
+        /// </summary>
+        /// <param name="Root"></param> 
+        public void PrintInorder(Node? Root) // Симетричный обход дерева с выводом данных по сотдникам 
         {
             if (Root != null)
             {
-                Inorder(Root.left);
-                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
-                Inorder(Root.right);
+                PrintInorder(Root.left);
+                Console.WriteLine(Root.Name + " - " + Root.Salary + " "); 
+                PrintInorder(Root.right);
             }
         }
-        public void Preorder(Node? Root)
+
+        /// <summary>
+        /// Метод поиска значения с Преордер объодом дерева испоьзуя рекурсию 
+        /// </summary>
+        /// <param name="Root"></param> Текущее узловое знаение 
+        /// <param name="findvalue"></param>
+        public string? FindPreorder(Node? Root, int? findvalue)
         {
             if (Root != null)
             {
-                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
-                Preorder(Root.left);
-                Preorder(Root.right);
+                if (Root.Salary == findvalue)
+                {
+                    return Root.Name;
+                } 
+                FindPreorder(Root.left, findvalue);
+                FindPreorder(Root.right, findvalue); 
             }
+            return null; 
         }
         public void Postorder(Node? Root)
         {
