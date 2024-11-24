@@ -11,13 +11,12 @@ namespace Home_Work_BST
 
     class Tree
     {
-        public Node root;
+        public Node? root;
         public Tree()
         {
             root = null;
-
         }
-        public Node ReturnRoot()
+        public Node? ReturnRoot()
         {
             return root;
         }
@@ -35,7 +34,7 @@ namespace Home_Work_BST
                 root = newNode;
             else
             {
-                Node current = root;
+                Node? current = root;
                 Node parent;
                 while (true)
                 {
@@ -62,7 +61,17 @@ namespace Home_Work_BST
             }
         }
 
-        public void Preorder(Node Root)
+       
+        public void Inorder(Node? Root) // Симетричный обход дерева с выводом данных по сотдникам 
+        {
+            if (Root != null)
+            {
+                Inorder(Root.left);
+                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
+                Inorder(Root.right);
+            }
+        }
+        public void Preorder(Node? Root)
         {
             if (Root != null)
             {
@@ -71,17 +80,7 @@ namespace Home_Work_BST
                 Preorder(Root.right);
             }
         }
-        public void Inorder(Node Root) // Симетричный обход дерева с выводом данных по сотдникам 
-        {
-            if (Root != null)
-            {
-                Inorder(Root.left);
-                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
-                Inorder(Root.right);
-
-            }
-        }
-        public void Postorder(Node Root)
+        public void Postorder(Node? Root)
         {
             if (Root != null)
             {

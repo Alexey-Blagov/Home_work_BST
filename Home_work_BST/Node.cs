@@ -9,14 +9,14 @@ namespace Home_Work_BST
 {
     internal class Node
     {
-        public string Name { get; }
+        public string? Name { get; }
         public int Salary { get; set; }
 
-        public Node left;
+        public Node? left;
 
-        public Node right;
+        public Node? right;
 
-        public Node(string _name, int _salary)
+        public Node (string _name, int _salary)
         {
             Name = _name;
             Salary = _salary;
