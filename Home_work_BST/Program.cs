@@ -84,10 +84,11 @@ namespace Home_Work_BST
                         // Вывод сотрудников по сортировки симетричный обход 
                         BST.PrintInorder(BST.ReturnRoot());
                         Console.WriteLine(" ");
-                        Console.WriteLine();          
+                        Console.WriteLine();
+                        firstinput = true; 
                         break;
                     case 1:
-                        int findsalary = EnterSalary();
+                            int findsalary = EnterSalary();
                         List <string?> findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
                         if (findname == null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
                         else
@@ -102,8 +103,7 @@ namespace Home_Work_BST
                     select = 1; 
                     firstinput = false;
                     continue;
-                 } 
-                
+                 }    
                 Console.WriteLine("Введите 0 для повторного ввода списка сотрудников, 1 для повторного поиска в том же вводе");
                 if (int.TryParse(Console.ReadLine(), out select))
                     {
