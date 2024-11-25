@@ -20,13 +20,6 @@ namespace Home_Work_BST
         {
             Name = _name;
             Salary = _salary;
-
-        }
-        public void display() // тестовый метод
-        {
-            Console.Write("[");
-            Console.Write($"{Name}, {Salary}");
-            Console.Write("]");
         }
     }
 }

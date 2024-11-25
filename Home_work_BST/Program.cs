@@ -50,15 +50,14 @@ namespace Home_Work_BST
 
         static void Main(string[] args)
         {
-
-
-
             // Логика ввода задачи 0, 1 
-            int iterator = 0;
+            bool firstinput=true; 
+            int  select=1; 
             Tree BST = new Tree();
             while (true)
             {
-                switch (iterator)
+                select = (firstinput) ? 0 : select; 
+                switch (select) 
                 {
                     case 0:
                         BST = new Tree(); // постороение нового дерева 
@@ -85,19 +84,30 @@ namespace Home_Work_BST
                         // Вывод сотрудников по сортировки симетричный обход 
                         BST.PrintInorder(BST.ReturnRoot());
                         Console.WriteLine(" ");
-                        Console.WriteLine();
+                        Console.WriteLine();          
                         break;
                     case 1:
                         int findsalary = EnterSalary();
-                        string? findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
+                        List <string?> findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
                         if (findname == null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
-                        else Console.WriteLine($"Имя сотрудника {findname}  ");
+                        else
+                        {
+                            foreach (string? item in findname) 
+                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {item } ");
+                        }
                         break;
                 }
+                if (firstinput) 
+                {
+                    select = 1; 
+                    firstinput = false;
+                    continue;
+                 } 
+                
                 Console.WriteLine("Введите 0 для повторного ввода списка сотрудников, 1 для повторного поиска в том же вводе");
-                if (!int.TryParse(Console.ReadLine(), out iterator))
+                if (int.TryParse(Console.ReadLine(), out select))
                     {
-                    if (iterator == 0 || iterator == 1)
+                    if (select == 0 || select == 1)
                         continue;
                     else break; 
                 }   
