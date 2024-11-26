@@ -89,12 +89,12 @@ namespace Home_Work_BST
                         break;
                     case 1:
                             int findsalary = EnterSalary();
-                        List <string?> findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
-                        if (findname == null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
+                        string? findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
+                        if (findname==null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
                         else
                         {
-                            foreach (string? item in findname) 
-                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {item } ");
+                            //foreach (string? item in findname) 
+                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {findname} ");
                         }
                         break;
                 }

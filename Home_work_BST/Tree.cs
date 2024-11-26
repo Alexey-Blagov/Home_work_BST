@@ -80,20 +80,21 @@ namespace Home_Work_BST
         /// </summary>
         /// <param name="Root"></param> Текущее узловое знаение 
         /// <param name="findvalue"></param>
-        public List<string?> FindPreorder(Node? Root, int? findvalue)
+        public string?  FindPreorder(Node? Root, int? findvalue)
         {
-            List<string?> valueList = new List<string?>(); 
+            //List<string?> valueList = new List<string?>(); 
             
             if (Root != null)
             {
                 if (Root.Salary == findvalue)
                 {
-                    valueList.Add(Root.Name); 
+                    //valueList.Add(Root.Name); 
+                    return Root.Name; 
                 } 
                 FindPreorder(Root.left, findvalue);
                 FindPreorder(Root.right, findvalue); 
             }
-            return valueList;  
+            return null;  
         }
         public void Postorder(Node? Root)
         {
