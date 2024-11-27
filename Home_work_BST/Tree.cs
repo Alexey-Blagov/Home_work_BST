@@ -92,14 +92,17 @@ namespace Home_Work_BST
 
         public Node? Find(int value)
         {
-           return Find(value, ReturnRoot());
+            return Find(value, ReturnRoot());
         }
         private Node? Find(int value, Node? parent)
         {
-
+            Node grantnode = (parent.left != null) ? parent.left : null;
             if (parent != null)
             {
-                if (value == parent.Salary) return parent;
+                if (value == parent.Salary)
+                {
+                    return parent;
+                }
                 if (value < parent.Salary)
                     return Find(value, parent.left);
                 else
