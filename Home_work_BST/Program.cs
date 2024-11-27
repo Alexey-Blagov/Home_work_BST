@@ -89,13 +89,18 @@ namespace Home_Work_BST
                         break;
                     case 1:
                             int findsalary = EnterSalary();
-                            Node? node = BST.Find(findsalary); 
+                            Tree? copyBST = BST;  
+                            Node? node = copyBST.Remove(findsalary);
 
-                        if (node==null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
+                        if (node == null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
                         else
                         {
-                            //foreach (string? item in findname) 
-                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {node.Name} Еще один черт { node.left.Salary} ");
+                            Console.WriteLine($"Имя сотрудника с зарплатой {findsalary} - {node.Name} ");
+                            while (node != null)
+                            {
+                                node = copyBST.Remove(findsalary);
+                                Console.WriteLine($"Имя сотрудника с зарплатой {findsalary} - {node.Name} ");
+                            }
                         }
                         break;
                 }

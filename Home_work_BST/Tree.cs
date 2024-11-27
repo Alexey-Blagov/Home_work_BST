@@ -65,7 +65,7 @@ namespace Home_Work_BST
         /// Мктод симетричного обхода сформированного BST с печатью значений по уровню зарплаты при таком обходе значения узлов выстраиваются по возрастанию
         /// </summary>
         /// <param name="Root"></param> 
-        public void PrintInorder(Node? Root) // Симетричный обход дерева с выводом данных по сотдникам 
+        public void PrintInorder(Node? Root) 
         {
             if (Root != null)
             {
@@ -88,15 +88,64 @@ namespace Home_Work_BST
 
         //    RemoveDuplicates(current.Left);
         //    RemoveDuplicates(current.Right);
+        public Node? Remove (int salary)
+        {
+            return RemoveMethed(ReturnRoot(), salary);
+        }
 
-
-        public Node? Find(int value)
+        private Node? RemoveMethed(Node? root, int salary)
+        {
+            if (root == null)
+                return root;
+            //if Val less than the root node,recurse left subtree
+            if (salary < root.Salary)
+                root.left = RemoveMethed(root.left, salary);
+            // if Val is more than the root node,recurse right subtree
+            else if (salary > root.Salary)
+            {
+                root.right = RemoveMethed(root.right, salary);
+            }
+            //else we found the VAl
+            else
+            {
+                //case 1: Node to be deleted has no children
+                if (root.left == null && root.right == null)
+                {
+                    //update root to null
+                    root = null;
+                }
+                //case 2 : node to be deleted has two children
+                else if (root.left != null && root.right != null)
+                {
+                    Node? maxNode = FindMax(root.right);
+                    //copy the value
+                    root.Salary = maxNode.Salary;
+                    root.right = RemoveMethed(root.right, maxNode.Salary);
+                }
+                //Удаление дочерних узлов дерева
+                else
+                {
+                    Node? child = (root.left != null) ? root.left : root.right;
+                    root = child;
+                }
+            }
+            return root;
+        }
+        private Node FindMax(Node node)
+        {
+            while (node.left != null)
+            {
+                node = node.left;
+            }
+            return node;
+        }
+            public Node? Find(int value)
         {
             return Find(value, ReturnRoot());
         }
         private Node? Find(int value, Node? parent)
         {
-            Node grantnode = (parent.left != null) ? parent.left : null;
+            Node? grantnode = (parent.left != null) ? parent.left : null;
             if (parent != null)
             {
                 if (value == parent.Salary)
@@ -119,13 +168,10 @@ namespace Home_Work_BST
         /// <param name="findvalue"></param>
         public string? FindPreorder(Node? Root, int? findvalue)
         {
-            //List<string?> valueList = new List<string?>(); 
-
             if (Root != null)
             {
                 if (Root.Salary == findvalue)
                 {
-                    //valueList.Add(Root.Name); 
                     return Root.Name;
                 }
                 FindPreorder(Root.left, findvalue);
