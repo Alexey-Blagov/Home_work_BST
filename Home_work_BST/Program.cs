@@ -78,7 +78,7 @@ namespace Home_Work_BST
                         BST.InsertNode("Максим", 49);
                         BST.InsertNode("Ольга", 89);
                         BST.InsertNode("Алексей", 77);
-                        BST.InsertNode("Ульяна", 67);
+                        BST.InsertNode("Ульяна", 30);
                         BST.InsertNode("Артём", 98);
                         BST.InsertNode("Игорь", 1);
                         // Вывод сотрудников по сортировки симетричный обход 
@@ -89,12 +89,13 @@ namespace Home_Work_BST
                         break;
                     case 1:
                             int findsalary = EnterSalary();
-                        string? findname = BST.FindPreorder(BST.ReturnRoot(), findsalary);
-                        if (findname==null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
+                            Node? node = BST.Find(findsalary); 
+
+                        if (node==null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
                         else
                         {
                             //foreach (string? item in findname) 
-                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {findname} ");
+                                Console.WriteLine ($"Имя сотрудника с зарплатой {findsalary} - {node.Name} Еще один черт { node.left.Salary} ");
                         }
                         break;
                 }

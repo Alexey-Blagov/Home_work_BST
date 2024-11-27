@@ -70,9 +70,43 @@ namespace Home_Work_BST
             if (Root != null)
             {
                 PrintInorder(Root.left);
-                Console.WriteLine(Root.Name + " - " + Root.Salary + " "); 
+                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
                 PrintInorder(Root.right);
             }
+        }
+        //        Метод поиска узла:
+        //Поиск узла в дереве начинается с его корня(метод FindWithParent) и предполагает следующие шаги:
+        //Если значения текущего узла null — закончить поиск и вернуть null.
+        //Если значения текущего узла равно искомому, результатом поиска будет текущие значение узла.
+        //Если искомое значение меньше чем текущие, нужно перейти к левому потомку и повторить алгоритм с первого пункта.
+        //Если значение больше или равно текущему, нужно перейти к правому потомку и повторить алгоритм с первого пункта.
+        //void RemoveDuplicates(Node current)
+        //{
+        //    Node duplicate;
+        //    while ((duplicate = Find(current.Left, current.Value)) != null)
+        //        Delete(duplicate);
+
+        //    RemoveDuplicates(current.Left);
+        //    RemoveDuplicates(current.Right);
+
+
+        public Node? Find(int value)
+        {
+           return Find(value, ReturnRoot());
+        }
+        private Node? Find(int value, Node? parent)
+        {
+
+            if (parent != null)
+            {
+                if (value == parent.Salary) return parent;
+                if (value < parent.Salary)
+                    return Find(value, parent.left);
+                else
+                    return Find(value, parent.right);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -80,21 +114,21 @@ namespace Home_Work_BST
         /// </summary>
         /// <param name="Root"></param> Текущее узловое знаение 
         /// <param name="findvalue"></param>
-        public string?  FindPreorder(Node? Root, int? findvalue)
+        public string? FindPreorder(Node? Root, int? findvalue)
         {
             //List<string?> valueList = new List<string?>(); 
-            
+
             if (Root != null)
             {
                 if (Root.Salary == findvalue)
                 {
                     //valueList.Add(Root.Name); 
-                    return Root.Name; 
-                } 
+                    return Root.Name;
+                }
                 FindPreorder(Root.left, findvalue);
-                FindPreorder(Root.right, findvalue); 
+                FindPreorder(Root.right, findvalue);
             }
-            return null;  
+            return null;
         }
         public void Postorder(Node? Root)
         {
