@@ -65,7 +65,7 @@ namespace Home_Work_BST
         /// Мктод симетричного обхода сформированного BST с печатью значений по уровню зарплаты при таком обходе значения узлов выстраиваются по возрастанию
         /// </summary>
         /// <param name="Root"></param> 
-        public void PrintInorder(Node? Root) 
+        public void PrintInorder(Node? Root)
         {
             if (Root != null)
             {
@@ -88,7 +88,7 @@ namespace Home_Work_BST
 
         //    RemoveDuplicates(current.Left);
         //    RemoveDuplicates(current.Right);
-        public Node? Remove (int salary)
+        public Node? Remove(int salary)
         {
             return RemoveMethed(ReturnRoot(), salary);
         }
@@ -139,13 +139,12 @@ namespace Home_Work_BST
             }
             return node;
         }
-            public Node? Find(int value)
+        public Node? Find(int value)
         {
             return Find(value, ReturnRoot());
         }
         private Node? Find(int value, Node? parent)
         {
-            Node? grantnode = (parent.left != null) ? parent.left : null;
             if (parent != null)
             {
                 if (value == parent.Salary)
@@ -157,7 +156,6 @@ namespace Home_Work_BST
                 else
                     return Find(value, parent.right);
             }
-
             return null;
         }
 
