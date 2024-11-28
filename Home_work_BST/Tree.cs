@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Home_Work_BST
-{
-
+{ 
+   /// <summary>
+   /// Класс Формирования BST Binary Search Tree 
+   /// </summary>
     class Tree
     {
         public Node? root;
@@ -17,19 +19,23 @@ namespace Home_Work_BST
         {
             root = null;
         }
+       /// <summary>
+       /// Метод возврата корневого элемента дерева
+       /// </summary>
+       /// <returns></returns> корень BST root 
         public Node? ReturnRoot()
         {
             return root;
         }
-
         /// <summary>
-        /// Функция добавления элементов в BST 
+        /// Функция добавления элементов в BST c формирванием дерева 
         /// </summary>
         /// <param name="name"></param> Имя сотрудника 
         /// <param name="salary"></param> Зарплата
         public void InsertNode(string name, int salary)
         {
-            Node newNode = new Node(name, salary); //Новый элемент BST 
+            //Новый элемент BST Листок 
+            Node newNode = new Node(name, salary);
 
             if (root == null)
                 root = newNode;
@@ -40,7 +46,8 @@ namespace Home_Work_BST
                 while (true)
                 {
                     parent = current;
-                    if (salary < current.Salary)
+                    //случай когда введеный элемент меньше текущего листа по Salary  
+                    if (salary < current.Salary) 
                     {
                         current = current.left;
                         if (current == null)
@@ -49,7 +56,8 @@ namespace Home_Work_BST
                             return;
                         }
                     }
-                    else
+                    //Сравнение Salary правый (больше или равно) формируем элемент, принцип постраения BST 
+                    else 
                     {
                         current = current.right;
                         if (current == null)
@@ -62,64 +70,58 @@ namespace Home_Work_BST
             }
         }
         /// <summary>
-        /// Мктод симетричного обхода сформированного BST с печатью значений по уровню зарплаты при таком обходе значения узлов выстраиваются по возрастанию
-        /// </summary>
-        /// <param name="Root"></param> 
+        /// Метод симетричного обхода (in-Order) сформированного BST с печатью значений по уровню зарплаты (Salary) 
+        /// </summary> Вывод данного обхода сортирует элементы по возрастанию 
+        /// <param name="Root"></param> Передаем зданчение листьев из дерева BST 
         public void PrintInorder(Node? Root)
         {
             if (Root != null)
             {
+                //Рекурсия сдвиг по левой ветви дерева  
                 PrintInorder(Root.left);
                 Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
+                //Рекурсия сдвиц по правой ветви дерева 
                 PrintInorder(Root.right);
             }
         }
-        //        Метод поиска узла:
-        //Поиск узла в дереве начинается с его корня(метод FindWithParent) и предполагает следующие шаги:
-        //Если значения текущего узла null — закончить поиск и вернуть null.
-        //Если значения текущего узла равно искомому, результатом поиска будет текущие значение узла.
-        //Если искомое значение меньше чем текущие, нужно перейти к левому потомку и повторить алгоритм с первого пункта.
-        //Если значение больше или равно текущему, нужно перейти к правому потомку и повторить алгоритм с первого пункта.
-        //void RemoveDuplicates(Node current)
-        //{
-        //    Node duplicate;
-        //    while ((duplicate = Find(current.Left, current.Value)) != null)
-        //        Delete(duplicate);
-
-        //    RemoveDuplicates(current.Left);
-        //    RemoveDuplicates(current.Right);
-        public Node? Remove(int salary)
+        /// <summary>
+        /// Метод удоления узлов в дереве  по найденному значению используем систему удолениядля вывода элементов которые имеюют одинаковые Salary
+        /// </summary>
+        /// <param name="salary"></param> Искомое значение Salary ЗП по базе удоляем из BST
+        public void Remove(int salary)
         {
-            return RemoveMethed(ReturnRoot(), salary);
+            RemoveMethed(ReturnRoot(), salary);
         }
-
+        /// <summary>
+        /// МВнутренний метод удаления элементов 
+        /// </summary>
+        /// <param name="root"></param> Текущий узел 
+        /// <param name="salary"></param> Значение удаляемого по поиску
+        /// <returns></returns>
         private Node? RemoveMethed(Node? root, int salary)
         {
             if (root == null)
                 return root;
-            //if Val less than the root node,recurse left subtree
             if (salary < root.Salary)
                 root.left = RemoveMethed(root.left, salary);
-            // if Val is more than the root node,recurse right subtree
             else if (salary > root.Salary)
             {
                 root.right = RemoveMethed(root.right, salary);
             }
-            //else we found the VAl
+            // Случай когда элемент базы равкен заданному значению 
             else
             {
-                //case 1: Node to be deleted has no children
+                //Нет доченрних листьев
                 if (root.left == null && root.right == null)
                 {
-                    //update root to null
                     root = null;
                 }
-                //case 2 : node to be deleted has two children
+                //Есть и правый и леавый дочерний элемент 
                 else if (root.left != null && root.right != null)
                 {
                     Node? maxNode = FindMax(root.right);
-                    //copy the value
                     root.Salary = maxNode.Salary;
+                    root.Name = maxNode.Name;
                     root.right = RemoveMethed(root.right, maxNode.Salary);
                 }
                 //Удаление дочерних узлов дерева
@@ -131,6 +133,11 @@ namespace Home_Work_BST
             }
             return root;
         }
+        /// <summary>
+        /// Вспомогательный метод поиска по передачи дочерних листьев элементов до конца дерева с передвижкой  
+        /// /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private Node FindMax(Node node)
         {
             while (node.left != null)
@@ -139,10 +146,21 @@ namespace Home_Work_BST
             }
             return node;
         }
+        /// <summary>
+        /// Метод поиска элемента в BST 
+        /// </summary>
+        /// <param name="value"></param> Искомое значение Salary ЗП 
+        /// <returns></returns>
         public Node? Find(int value)
         {
             return Find(value, ReturnRoot());
         }
+        /// <summary>
+        /// Внутренний метод поиска BST рекурсия 
+        /// </summary>
+        /// <param name="value"></param> Искомое значенеи 
+        /// <param name="parent"></param> Родительский элемент поиска 
+        /// <returns></returns>
         private Node? Find(int value, Node? parent)
         {
             if (parent != null)
@@ -157,34 +175,6 @@ namespace Home_Work_BST
                     return Find(value, parent.right);
             }
             return null;
-        }
-
-        /// <summary>
-        /// Метод поиска значения с Преордер объодом дерева испоьзуя рекурсию 
-        /// </summary>
-        /// <param name="Root"></param> Текущее узловое знаение 
-        /// <param name="findvalue"></param>
-        public string? FindPreorder(Node? Root, int? findvalue)
-        {
-            if (Root != null)
-            {
-                if (Root.Salary == findvalue)
-                {
-                    return Root.Name;
-                }
-                FindPreorder(Root.left, findvalue);
-                FindPreorder(Root.right, findvalue);
-            }
-            return null;
-        }
-        public void Postorder(Node? Root)
-        {
-            if (Root != null)
-            {
-                Postorder(Root.left);
-                Postorder(Root.right);
-                Console.WriteLine(Root.Name + " - " + Root.Salary + " ");
-            }
         }
     }
 }

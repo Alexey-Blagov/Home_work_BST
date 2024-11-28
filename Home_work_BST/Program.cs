@@ -51,13 +51,13 @@ namespace Home_Work_BST
         static void Main(string[] args)
         {
             // Логика ввода задачи 0, 1 
-            bool firstinput=true; 
-            int  select=1; 
+            bool firstinput = true;
+            int select = 1;
             Tree BST = new Tree();
             while (true)
             {
-                select = (firstinput) ? 0 : select; 
-                switch (select) 
+                select = (firstinput) ? 0 : select;
+                switch (select)
                 {
                     case 0:
                         BST = new Tree(); // постороение нового дерева 
@@ -76,50 +76,54 @@ namespace Home_Work_BST
                         BST.InsertNode("Ирина", 15);
                         BST.InsertNode("Александр", 63);
                         BST.InsertNode("Максим", 49);
-                        BST.InsertNode("Ольга", 89);
+                        BST.InsertNode("Ольга", 30);
                         BST.InsertNode("Алексей", 77);
-                        BST.InsertNode("Ульяна", 30);
+                        BST.InsertNode("Ульяна", 63);
                         BST.InsertNode("Артём", 98);
                         BST.InsertNode("Игорь", 1);
                         // Вывод сотрудников по сортировки симетричный обход 
                         BST.PrintInorder(BST.ReturnRoot());
                         Console.WriteLine(" ");
                         Console.WriteLine();
-                        firstinput = true; 
+                        firstinput = true;
                         break;
                     case 1:
-                            int findsalary = EnterSalary();
-                            Tree? copyBST = BST;  
-                            Node? node = copyBST.Find(findsalary);
-                            //node = copyBST.Remove(findsalary);
+                        int findsalary = EnterSalary();
+                        Tree? copyBST = BST;
+                        Node? node = copyBST.Find(findsalary);
+                        //node = copyBST.Remove(findsalary);
                         if (node == null) Console.WriteLine("Искомого сотрудника с данной зарпалтой не найдено");
                         else
                         {
                             Console.WriteLine($"Имя сотрудника с зарплатой {findsalary} - {node.Name} ");
-                            node = copyBST.Remove(findsalary);
+                            copyBST.Remove(findsalary);
                             while (node != null)
                             {
                                 node = copyBST.Find(findsalary);
-                                Console.WriteLine($"Имя сотрудника с зарплатой {findsalary} - {node.Name} ");
-                                node = copyBST.Remove(findsalary);
+                                if (node != null)
+                                {
+                                    Console.WriteLine($"Имя сотрудника с зарплатой {findsalary} - {node.Name} ");
+                                    copyBST.Remove(findsalary);
+                                }
                             }
                         }
+
                         break;
                 }
-                if (firstinput) 
+                if (firstinput)
                 {
-                    select = 1; 
+                    select = 1;
                     firstinput = false;
                     continue;
-                 }    
+                }
                 Console.WriteLine("Введите 0 для повторного ввода списка сотрудников, 1 для повторного поиска в том же вводе");
                 if (int.TryParse(Console.ReadLine(), out select))
-                    {
+                {
                     if (select == 0 || select == 1)
                         continue;
-                    else break; 
-                }   
-                else break; 
+                    else break;
+                }
+                else break;
             }
         }
     }

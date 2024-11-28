@@ -9,7 +9,7 @@ namespace Home_Work_BST
 {
     internal class Node
     {
-        public string? Name { get; }
+        public string? Name { get; set; }
         public int Salary { get; set; }
 
         public Node? left;
